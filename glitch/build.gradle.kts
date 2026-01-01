@@ -70,8 +70,6 @@ android {
 
 configure<PublishingExtension> {
     publications.withType<MavenPublication> {
-        artifactId = artifactId.replace("glitch-library", "glitch")
-
         val javadocJar = tasks.register("${name}JavadocJar", Jar::class) {
             archiveClassifier.set("javadoc")
             archiveAppendix.set(name)

@@ -119,14 +119,14 @@ limitations under the License.
 
 ## 🏗 Project Structure & Development
 
-- `:glitch-library`: The core Kotlin Multiplatform library.
-- `:composeApp`: A sample application demonstrating the glitch effects on Android, iOS, Desktop, and Web.
+- `:glitch`: The core Kotlin Multiplatform library.
+- `:sample`: A sample application demonstrating the glitch effects on Android, iOS, Desktop, and Web.
 
 ### Running the Sample App
 
-- **Android**: `./gradlew :composeApp:assembleDebug`
-- **Desktop**: `./gradlew :composeApp:run`
-- **Web (Wasm)**: `./gradlew :composeApp:wasmJsBrowserDevelopmentRun`
+- **Android**: `./gradlew :sample:assembleDebug`
+- **Desktop**: `./gradlew :sample:run`
+- **Web (Wasm)**: `./gradlew :sample:wasmJsBrowserDevelopmentRun`
 - **iOS**: Open `iosApp/iosApp.xcworkspace` in Xcode.
 
 ---

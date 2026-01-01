@@ -1,4 +1,4 @@
-import ComposeApp
+import Sample
 import SwiftUI
 import UIKit
 

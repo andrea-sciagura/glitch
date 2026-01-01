@@ -3,7 +3,7 @@ package xyz.andreasciagura.glitch.sample
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class ComposeAppCommonTest {
+class SampleCommonTest {
 
     @Test
     fun example() {

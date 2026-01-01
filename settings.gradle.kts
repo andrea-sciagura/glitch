@@ -1,4 +1,4 @@
-rootProject.name = "glitch"
+rootProject.name = "glitch-multiplatform"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
@@ -32,5 +32,5 @@ plugins {
     id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
 }
 
-include(":composeApp")
-include(":glitch-library")
+include(":sample")
+include(":glitch")

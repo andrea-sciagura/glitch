@@ -24,8 +24,8 @@ import androidx.compose.foundation.layout.height
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
-import glitch.composeapp.generated.resources.Res
-import glitch.composeapp.generated.resources.compose_multiplatform
+import xyz.andreasciagura.glitch.sample.generated.resources.Res
+import xyz.andreasciagura.glitch.sample.generated.resources.compose_multiplatform
 
 @Composable
 @Preview
