@@ -1,7 +1,24 @@
+/*
+ * Copyright 2024-2026 Andrea Sciagura
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.publish.PublishingExtension
+import org.gradle.plugins.signing.SigningExtension
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -9,6 +26,7 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     id("maven-publish")
+    id("signing")
 }
 
 group = "xyz.andrea-sciagura.anim"
@@ -16,6 +34,7 @@ version = "1.0.0"
 
 kotlin {
     androidTarget {
+        publishLibraryVariants("release")
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_11)
         }
@@ -56,7 +75,7 @@ kotlin {
 }
 
 android {
-    namespace = "xyz.andreasciagura.glitch"
+    namespace = "xyz.andrea_sciagura.glitch"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
@@ -69,6 +88,16 @@ android {
 }
 
 configure<PublishingExtension> {
+    repositories {
+        maven {
+            name = "OSSRH"
+            url = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
+            credentials {
+                username = (project.findProperty("mavenCentralUsername") ?: System.getenv("MAVEN_CENTRAL_USERNAME"))?.toString() ?: ""
+                password = (project.findProperty("mavenCentralPassword") ?: System.getenv("MAVEN_CENTRAL_PASSWORD"))?.toString() ?: ""
+            }
+        }
+    }
     publications.withType<MavenPublication> {
         val javadocJar = tasks.register("${name}JavadocJar", Jar::class) {
             archiveClassifier.set("javadoc")
@@ -99,5 +128,15 @@ configure<PublishingExtension> {
                 url.set("https://github.com/andrea-sciagura/glitch")
             }
         }
+    }
+}
+
+configure<SigningExtension> {
+    val keyId = (project.findProperty("signing.keyId")?.toString()?.takeIf { it.isNotBlank() } ?: System.getenv("SIGNING_KEY_ID"))
+    val key = (project.findProperty("signing.key")?.toString()?.takeIf { it.isNotBlank() } ?: System.getenv("SIGNING_KEY"))
+    val password = (project.findProperty("signing.password")?.toString()?.takeIf { it.isNotBlank() } ?: System.getenv("SIGNING_PASSWORD"))
+    if (!keyId.isNullOrBlank() && !key.isNullOrBlank() && !password.isNullOrBlank()) {
+        useInMemoryPgpKeys(keyId, key, password)
+        sign(publishing.publications)
     }
 }

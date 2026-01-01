@@ -14,21 +14,12 @@
  * limitations under the License.
  */
 
-import Sample
-import SwiftUI
-import UIKit
+package xyz.andrea_sciagura.glitch.sample
 
-struct ComposeView: UIViewControllerRepresentable {
-    func makeUIViewController(context: Context) -> UIViewController {
-        MainViewControllerKt.MainViewController()
-    }
+class Greeting {
+    private val platform = getPlatform()
 
-    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
-}
-
-struct ContentView: View {
-    var body: some View {
-        ComposeView()
-            .ignoresSafeArea()
+    fun greet(): String {
+        return "Hello, ${platform.name}!"
     }
 }

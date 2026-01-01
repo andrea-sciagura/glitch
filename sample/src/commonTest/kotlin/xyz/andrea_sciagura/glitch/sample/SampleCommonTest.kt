@@ -14,21 +14,15 @@
  * limitations under the License.
  */
 
-import Sample
-import SwiftUI
-import UIKit
+package xyz.andrea_sciagura.glitch.sample
 
-struct ComposeView: UIViewControllerRepresentable {
-    func makeUIViewController(context: Context) -> UIViewController {
-        MainViewControllerKt.MainViewController()
-    }
+import kotlin.test.Test
+import kotlin.test.assertEquals
 
-    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
-}
+class SampleCommonTest {
 
-struct ContentView: View {
-    var body: some View {
-        ComposeView()
-            .ignoresSafeArea()
+    @Test
+    fun example() {
+        assertEquals(3, 1 + 2)
     }
 }

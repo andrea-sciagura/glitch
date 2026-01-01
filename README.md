@@ -100,7 +100,7 @@ Contributions are welcome! If you find a bug or have a feature request, please o
 ## 📄 License
 
 ```
-Copyright 2024 Andrea Sciagura
+Copyright 2024-2026 Andrea Sciagura
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -128,6 +128,38 @@ limitations under the License.
 - **Desktop**: `./gradlew :sample:run`
 - **Web (Wasm)**: `./gradlew :sample:wasmJsBrowserDevelopmentRun`
 - **iOS**: Open `iosApp/iosApp.xcworkspace` in Xcode.
+
+---
+
+### 🚀 Publishing
+
+The library is configured for publication to Maven Central. To publish and sign the library, you need to provide your credentials and GPG key details.
+
+#### Local Publishing
+For local publishing, you can add these to your `local.properties` (which is git-ignored) or as environment variables:
+
+- `mavenCentralUsername`: Your OSSRH/Maven Central username.
+- `mavenCentralPassword`: Your OSSRH/Maven Central password.
+- `signing.keyId`: Your GPG key ID (8 characters).
+- `signing.key`: Your armored GPG private key.
+- `signing.password`: Your GPG key password.
+
+To publish to Maven Local (signed if keys are provided):
+
+```bash
+./gradlew :glitch:publishToMavenLocal
+```
+
+#### GitHub Actions (CI/CD)
+The project includes a `release.yml` workflow that automatically publishes to Maven Central when a PR is merged into the `release` or `beta` branches. To enable this, you must add the following **GitHub Secrets** to your repository:
+
+- `MAVEN_CENTRAL_USERNAME`
+- `MAVEN_CENTRAL_PASSWORD`
+- `SIGNING_KEY_ID`
+- `SIGNING_KEY`
+- `SIGNING_PASSWORD`
+
+The workflow will use these secrets to sign the artifacts and authenticate with Sonatype OSSRH.
 
 ---
 

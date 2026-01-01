@@ -14,21 +14,12 @@
  * limitations under the License.
  */
 
-import Sample
-import SwiftUI
-import UIKit
+package xyz.andrea_sciagura.glitch.sample
 
-struct ComposeView: UIViewControllerRepresentable {
-    func makeUIViewController(context: Context) -> UIViewController {
-        MainViewControllerKt.MainViewController()
-    }
+import platform.UIKit.UIDevice
 
-    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
+class IOSPlatform : Platform {
+    override val name: String = UIDevice.currentDevice.systemName() + " " + UIDevice.currentDevice.systemVersion
 }
 
-struct ContentView: View {
-    var body: some View {
-        ComposeView()
-            .ignoresSafeArea()
-    }
-}
+actual fun getPlatform(): Platform = IOSPlatform()

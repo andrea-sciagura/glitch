@@ -14,21 +14,14 @@
  * limitations under the License.
  */
 
-import Sample
-import SwiftUI
-import UIKit
+package xyz.andrea_sciagura.glitch.sample
 
-struct ComposeView: UIViewControllerRepresentable {
-    func makeUIViewController(context: Context) -> UIViewController {
-        MainViewControllerKt.MainViewController()
-    }
+import androidx.compose.ui.ExperimentalComposeUiApi
+import androidx.compose.ui.window.ComposeViewport
 
-    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
-}
-
-struct ContentView: View {
-    var body: some View {
-        ComposeView()
-            .ignoresSafeArea()
+@OptIn(ExperimentalComposeUiApi::class)
+fun main() {
+    ComposeViewport {
+        App()
     }
 }

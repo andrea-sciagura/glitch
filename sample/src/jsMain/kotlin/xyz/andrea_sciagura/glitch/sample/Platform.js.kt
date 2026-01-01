@@ -14,21 +14,10 @@
  * limitations under the License.
  */
 
-import Sample
-import SwiftUI
-import UIKit
+package xyz.andrea_sciagura.glitch.sample
 
-struct ComposeView: UIViewControllerRepresentable {
-    func makeUIViewController(context: Context) -> UIViewController {
-        MainViewControllerKt.MainViewController()
-    }
-
-    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
+class JsPlatform : Platform {
+    override val name: String = "Web with Kotlin/JS"
 }
 
-struct ContentView: View {
-    var body: some View {
-        ComposeView()
-            .ignoresSafeArea()
-    }
-}
+actual fun getPlatform(): Platform = JsPlatform()
